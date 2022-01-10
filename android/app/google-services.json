@@ -49,6 +49,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563074915995:android:932f1ef53c8213f253703e",
+        "android_client_info": {
+          "package_name": "com.example.onego_rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563074915995-684gef195v0adokbr4adtllsjs3cpmav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeny5VrMFhQWCtfqROqQF-eCJthVWOTik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563074915995-684gef195v0adokbr4adtllsjs3cpmav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
