@@ -56,7 +56,7 @@ class RiderDetailsModel {
       'profile_pic_url': profilePicUrl,
       'date_joined': dateJoined,
       'has_verify_number': false,
-      'has_create_wallet_pin': false,
+      'has_create_wallet_pin': hasCreateWalletPin ?? false,
       'is_rider_free': isRiderFree ?? true,
     };
   }

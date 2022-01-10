@@ -8,7 +8,9 @@ import 'cores/utils/route_name.dart';
 import 'features/auth/binding/auth_binding.dart';
 import 'features/auth/views/pages/forgot_password_screen.dart';
 import 'features/auth/views/pages/login_screen.dart';
+import 'features/auth/views/pages/set_wallet_pin_screen.dart';
 import 'features/auth/views/pages/signup_screen.dart';
+import 'features/auth/views/pages/update_profile_screen.dart';
 import 'features/home/views/screens/home_screen.dart';
 
 class OneGoRiderApp extends StatelessWidget {
@@ -56,6 +58,14 @@ List<GetPage<dynamic>>? pages() {
     GetPage<Widget>(
       page: () => const HomeScreen(),
       name: RouteName.home,
+    ),
+    GetPage<Widget>(
+      page: () => const UpdateProfilePicScreen(),
+      name: '/update-profile',
+    ),
+    GetPage<Widget>(
+      page: () => const CreateWalletPinScreen(),
+      name: '/create-wallet-pin',
     ),
   ];
 }
