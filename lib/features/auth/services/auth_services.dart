@@ -12,7 +12,7 @@ import '../../notification/services/firebase_messaging_utils.dart';
 import '../../../cores/utils/local_database_repo.dart';
 import '../../../cores/utils/logger.dart';
 import '../../../features/auth/model/login_user_model.dart';
-import '../../../features/auth/model/user_details_model.dart';
+import '../model/rider_details_model.dart';
 
 class AuthenticationRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -39,6 +39,8 @@ class AuthenticationRepo {
     String email,
     String password,
   ) async {
+    await checkIfIsRider(email);
+
     final UserCredential userCredential =
         await firebaseAuth.signInWithEmailAndPassword(
       email: email,
@@ -224,6 +226,15 @@ class AuthenticationRepo {
     }
   }
 
+  Future<void> checkIfIsRider(String email) async {
+    final QuerySnapshot querySnapshot =
+        await userCollectionRef.where('email', isEqualTo: email).limit(1).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      throw 'Rider Account Was Not Found!';
+    }
+  }
+
   Future<bool> checkPhoneNumberExist(String phone) async {
     final QuerySnapshot querySnapshot = await userCollectionRef
         .where('phone_number', isEqualTo: phone)
@@ -247,7 +258,7 @@ class AuthenticationRepo {
       UploadTask uploadTask = ref.putFile(file);
 
       uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
-        print(
+        log(
           'Progress: ${(snapshot.bytesTransferred / snapshot.totalBytes) * 100} %',
         );
         // loadingPercentage.value =

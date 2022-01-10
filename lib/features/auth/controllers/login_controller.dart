@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onego_rider/features/auth/model/user_details_model.dart';
+import 'package:onego_rider/features/auth/model/rider_details_model.dart';
 import '../../../cores/constants/error_text.dart';
 import '../../../cores/utils/emums.dart';
 import '../../../cores/utils/logger.dart';

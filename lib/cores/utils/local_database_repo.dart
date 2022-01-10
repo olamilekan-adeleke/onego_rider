@@ -1,4 +1,4 @@
-import '../../features/auth/model/user_details_model.dart';
+import '../../features/auth/model/rider_details_model.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LocalDatabaseRepo {
