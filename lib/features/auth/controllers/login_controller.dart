@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onego_rider/cores/utils/route_name.dart';
 import 'package:onego_rider/features/auth/model/user_details_model.dart';
 import '../../../cores/constants/error_text.dart';
 import '../../../cores/utils/emums.dart';
@@ -15,7 +14,7 @@ class LoginControllers extends GetxController {
   static final AuthenticationRepo _authenticationRepo =
       Get.find<AuthenticationRepo>();
   final TextEditingController emailController =
-      TextEditingController(text: ' ola100@gmail.com');
+      TextEditingController(text: ' ola-rider100@gmail.com');
   final TextEditingController passwordController =
       TextEditingController(text: 'test123456');
 
@@ -24,16 +23,14 @@ class LoginControllers extends GetxController {
   Future<void> loginUser() async {
     _controllerStateEnum.value = ControllerState.busy;
     try {
-      final UserDetailsModel userDetails =
+      final RiderDetailsModel userDetails =
           await _authenticationRepo.loginUserWithEmailAndPassword(
         emailController.text.trim(),
         passwordController.text.trim(),
       );
       _controllerStateEnum.value = ControllerState.success;
 
-      if (userDetails.hasVerifyNumber == false) {
-        Get.toNamed(RouteName.smsCode);
-      } else if (userDetails.hasCreateWalletPin == false) {
+      if (userDetails.hasCreateWalletPin == false) {
         Get.toNamed('/create-wallet-pin');
       } else {
         Get.offAllNamed('/home');

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserDetailsModel {
-  UserDetailsModel({
+class RiderDetailsModel {
+  RiderDetailsModel({
     required this.uid,
     required this.email,
     required this.fullName,
@@ -11,33 +11,30 @@ class UserDetailsModel {
     required this.phoneNumber,
     this.profilePicUrl,
     this.dateJoined,
-    required this.walletBalance,
-    this.hasVerifyNumber,
     this.hasCreateWalletPin,
+    this.isRiderFree,
   });
 
-  factory UserDetailsModel.fromMap(Map<String, dynamic>? map) {
-    return UserDetailsModel(
+  factory RiderDetailsModel.fromMap(Map<String, dynamic>? map) {
+    return RiderDetailsModel(
       uid: map!['uid'] as String,
       email: map['email'] as String,
       username: map['username'] as String,
       fullName: map['full_name'] as String,
-      hasVerifyNumber: (map['has_verify_number'] ?? false) as bool,
       hasCreateWalletPin: (map['has_create_wallet_pin'] ?? false) as bool,
-      walletBalance: map['wallet_balance'] != null
-          ? double.parse(map['wallet_balance'].toString())
-          : 0.0,
       phoneNumber: map['phone_number'] as String,
       profilePicUrl: map['profile_pic_url'] != null
           ? map['profile_pic_url'] as String
           : null,
       dateJoined:
           map['date_joined'] != null ? map['date_joined'] as Timestamp : null,
+      isRiderFree:
+          map['is_rider_free'] != null ? map['is_rider_free'] as bool : true,
     );
   }
 
-  factory UserDetailsModel.fromJson(String source) =>
-      UserDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory RiderDetailsModel.fromJson(String source) =>
+      RiderDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   final String uid;
   final String email;
@@ -46,8 +43,7 @@ class UserDetailsModel {
   final String phoneNumber;
   final String? profilePicUrl;
   final Timestamp? dateJoined;
-  final double? walletBalance;
-  final bool? hasVerifyNumber;
+  final bool? isRiderFree;
   final bool? hasCreateWalletPin;
 
   Map<String, dynamic> toMap() {
@@ -61,6 +57,7 @@ class UserDetailsModel {
       'date_joined': dateJoined,
       'has_verify_number': false,
       'has_create_wallet_pin': false,
+      'is_rider_free': isRiderFree ?? true,
     };
   }
 
@@ -71,12 +68,13 @@ class UserDetailsModel {
       'full_name': fullName,
       'phone_number': phoneNumber,
       'profile_pic_url': profilePicUrl,
+      'is_rider_free': isRiderFree ?? true,
     };
   }
 
   String toJson() => json.encode(toMap());
 
-  UserDetailsModel copyWith({
+  RiderDetailsModel copyWith({
     String? uid,
     String? email,
     String? fullName,
@@ -88,7 +86,7 @@ class UserDetailsModel {
     bool? hasVerifyNumber,
     bool? hasCreateWalletPin,
   }) {
-    return UserDetailsModel(
+    return RiderDetailsModel(
       uid: uid ?? this.uid,
       email: email ?? this.email,
       fullName: fullName ?? this.fullName,
@@ -96,8 +94,6 @@ class UserDetailsModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       profilePicUrl: profilePicUrl ?? this.profilePicUrl,
       dateJoined: dateJoined ?? this.dateJoined,
-      walletBalance: walletBalance ?? this.walletBalance,
-      hasVerifyNumber: hasVerifyNumber ?? this.hasVerifyNumber,
       hasCreateWalletPin: hasCreateWalletPin ?? this.hasCreateWalletPin,
     );
   }

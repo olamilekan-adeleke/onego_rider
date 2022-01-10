@@ -9,9 +9,9 @@ class LocalDatabaseRepo {
     await box.write(userDataBoxName, data);
   }
 
-  Future<UserDetailsModel> getUserDataFromLocalDB() async {
+  Future<RiderDetailsModel> getUserDataFromLocalDB() async {
     final Map<String, dynamic> userData =
         await box.read(userDataBoxName) as Map<String, dynamic>;
-    return UserDetailsModel.fromMap(userData);
+    return RiderDetailsModel.fromMap(userData);
   }
 }

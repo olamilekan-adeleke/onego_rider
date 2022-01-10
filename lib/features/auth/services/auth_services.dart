@@ -19,7 +19,7 @@ class AuthenticationRepo {
   static final LocalDatabaseRepo localDatabaseRepo =
       Get.find<LocalDatabaseRepo>();
   final CollectionReference<dynamic> userCollectionRef =
-      FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('riders');
 
   LoginUserModel? userFromFirestore(User? user) {
     return user != null ? LoginUserModel(user.uid) : null;
@@ -35,7 +35,7 @@ class AuthenticationRepo {
         .map((User? user) => userFromFirestore(user));
   }
 
-  Future<UserDetailsModel> loginUserWithEmailAndPassword(
+  Future<RiderDetailsModel> loginUserWithEmailAndPassword(
     String email,
     String password,
   ) async {
@@ -53,7 +53,7 @@ class AuthenticationRepo {
     await localDatabaseRepo.saveUserDataToLocalDB(userData);
     await PushNotificationService.subscribeToTopic(user!.uid);
 
-    return UserDetailsModel.fromMap(userData);
+    return RiderDetailsModel.fromMap(userData);
   }
 
   Future<bool> authenticateUser(String password) async {
@@ -93,11 +93,10 @@ class AuthenticationRepo {
 
     if (user == null) throw Exception('Opps, an error occurred!');
 
-    final UserDetailsModel userDetailsModel = UserDetailsModel(
+    final RiderDetailsModel userDetailsModel = RiderDetailsModel(
       uid: user.uid,
       email: email,
       fullName: fullName,
-      walletBalance: 0.0,
       phoneNumber: number,
       dateJoined: Timestamp.now(),
       username: username,
@@ -109,12 +108,11 @@ class AuthenticationRepo {
 
     await PushNotificationService.subscribeToTopic(user.uid);
 
-    final UserDetailsModel userDetailsForLocalDb = UserDetailsModel(
+    final RiderDetailsModel userDetailsForLocalDb = RiderDetailsModel(
       uid: user.uid,
       email: email,
       fullName: fullName,
       phoneNumber: number,
-      walletBalance: 0.0,
       username: username,
     );
 
@@ -144,12 +142,12 @@ class AuthenticationRepo {
     }
   }
 
-  Future<void> addUserDataToFirestore(UserDetailsModel userDetails) async {
+  Future<void> addUserDataToFirestore(RiderDetailsModel userDetails) async {
     await userCollectionRef.doc(userDetails.uid).set(userDetails.toMap());
     infoLog('Added User database', title: 'Add user data To Db');
   }
 
-  Future<void> updateUserData(UserDetailsModel userDetails) async {
+  Future<void> updateUserData(RiderDetailsModel userDetails) async {
     try {
       await userCollectionRef.doc(userDetails.uid).update(userDetails.toMap());
       await localDatabaseRepo.saveUserDataToLocalDB(userDetails.toMap());
