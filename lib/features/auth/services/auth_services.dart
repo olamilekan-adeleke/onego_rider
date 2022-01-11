@@ -230,7 +230,7 @@ class AuthenticationRepo {
     final QuerySnapshot querySnapshot =
         await userCollectionRef.where('email', isEqualTo: email).limit(1).get();
 
-    if (querySnapshot.docs.isNotEmpty) {
+    if (querySnapshot.docs.isEmpty) {
       throw 'Rider Account Was Not Found!';
     }
   }
