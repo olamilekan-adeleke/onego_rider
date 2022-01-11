@@ -14,7 +14,7 @@ class LoginControllers extends GetxController {
   static final AuthenticationRepo _authenticationRepo =
       Get.find<AuthenticationRepo>();
   final TextEditingController emailController =
-      TextEditingController(text: ' ola-rider100@gmail.com');
+      TextEditingController(text: ' ola@gmail.com');
   final TextEditingController passwordController =
       TextEditingController(text: 'test123456');
 
