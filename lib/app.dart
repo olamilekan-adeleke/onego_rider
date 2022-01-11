@@ -11,6 +11,7 @@ import 'features/auth/views/pages/login_screen.dart';
 import 'features/auth/views/pages/set_wallet_pin_screen.dart';
 import 'features/auth/views/pages/signup_screen.dart';
 import 'features/auth/views/pages/update_profile_screen.dart';
+import 'features/home/controllers/home_controller.dart';
 import 'features/home/views/screens/home_screen.dart';
 
 class OneGoRiderApp extends StatelessWidget {
@@ -58,6 +59,7 @@ List<GetPage<dynamic>>? pages() {
     GetPage<Widget>(
       page: () => const HomeScreen(),
       name: RouteName.home,
+      bindings: [HomeBinding()],
     ),
     GetPage<Widget>(
       page: () => const UpdateProfilePicScreen(),
