@@ -7,6 +7,7 @@ import 'package:onego_rider/cores/utils/sizer_utils.dart';
 import 'package:onego_rider/cores/utils/snack_bar_service.dart';
 import 'package:onego_rider/features/home/controllers/termial_controller.dart';
 import 'package:onego_rider/features/home/model/terminal_model.dart';
+import 'package:onego_rider/features/home/views/screens/mark_as_availble_screen.dart';
 
 class SelectTerminalScreen extends StatelessWidget {
   const SelectTerminalScreen({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class SelectTerminalScreen extends StatelessWidget {
                 }
                 return CustomButton(
                   text: 'Continue',
-                  onTap: () {},
+                  onTap: () => Get.to(() => const MarkAsAvailableScreen()),
                 );
               }),
             ],

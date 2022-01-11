@@ -13,6 +13,7 @@ class TerminalController extends GetxController {
   final RxList<TerminalModel> terminals = <TerminalModel>[].obs;
   Rx<TerminalModel>? selectedTerminalModel;
   final RxString selectedTerminalText = ''.obs;
+  final RxInt seatNumber = 1.obs;
 
   void updateSelectedTerminal(String text) {
     final TerminalModel _selectedTerminalModel =
