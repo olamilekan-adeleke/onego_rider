@@ -36,4 +36,10 @@ class TerminalController extends GetxController {
       showErrorSnackBar(e.toString());
     }
   }
+
+  @override
+  void onReady() {
+    getTerminals();
+    super.onReady();
+  }
 }

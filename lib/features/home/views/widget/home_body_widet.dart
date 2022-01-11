@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/route_manager.dart';
 import 'package:onego_rider/cores/components/custom_button.dart';
 import 'package:onego_rider/cores/components/custom_text_widget.dart';
+import 'package:onego_rider/features/home/views/screens/select_terminal_screen.dart';
 
 import 'package:onego_rider/features/home/views/widget/home_header_widget.dart';
 import '../../../../cores/utils/sizer_utils.dart';
@@ -42,7 +44,12 @@ class HomeBodyWidget extends StatelessWidget {
                 fontSize: sizerSp(14),
               ),
               const Spacer(),
-              CustomButton(text: 'Pick Up', onTap: () {}),
+              CustomButton(
+                text: 'Pick Up',
+                onTap: () => Get.to(
+                  () => const SelectTerminalScreen(),
+                ),
+              ),
             ],
           ),
         ),
